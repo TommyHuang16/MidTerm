@@ -24,7 +24,10 @@ for (id,name,price,stock) in records:
 	print(f"<p>編號:{id} 名稱:{name} 價格:{price} 庫存:{stock}</p>")
 
 print("<a href='addCartForm.html'> 開始購買 </a>")
-print(f"<p><a href='myCart.py'> 查看購物車 </a></p>")
+print("<p><a href='myCart.py'> 查看購物車 </a></p>")
+print("<p><a href='addStock.html'> 增加存貨 </a></p>")
+print("<p><a href='addGood.html'> 新增商品項目 </a></p>")
+print("<p><a href='removeGood.html'> 移除商品項目 </a></p>")
 
 print("</body></html>")
 
