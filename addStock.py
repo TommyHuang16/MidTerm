@@ -22,7 +22,7 @@ print("""
 #查詢
 form = cgi.FieldStorage()
 id=form.getvalue('id') 
-stock = form.getvalue('amount')
+stock = form.getvalue('stock')
 ctrl.addStock(id,stock)
 print("存貨已增加!")
 print("<br><a href='menu.py'>確認</a>")

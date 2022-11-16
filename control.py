@@ -24,14 +24,14 @@ def removeFromCart(id):
 
 def addIntoCart(id):
     #加入購物車
-    sql="UPDATE `mylist` SET `amount`= amount+1 WHERE id=%s and stock != 0;"
+    sql="UPDATE `mylist` SET `amount`= amount+1 WHERE id=%s;"
     cur.execute(sql,(id,))
     conn.commit()
     return True
 
 def updateStock1(id):
     #加入購物車後，購物列表存貨更新
-    sql="UPDATE `shoplist` SET `stock`= stock-1 WHERE id=%s;"
+    sql="UPDATE `shoplist` SET `stock`= stock-1 WHERE id=%s and stock != 0;"
     cur.execute(sql,(id,))
     conn.commit()
     return True
@@ -50,16 +50,30 @@ def addStock(id,stock):
     conn.commit()
     return True
 
-def addGood(name,price,stock):
-    #增加商品項目
+def addGoodInShopList(name,price,stock):
+    #增加商品項目(商品列表)
     sql="insert into shoplist (name,price,stock) values (%s,%s,%s);"
     cur.execute(sql,(name,price,stock))
     conn.commit()
     return True
 
-def removeGood(id):
+def addGoodInCart(name,price,stock):
+    #增加商品項目(商品列表)
+    sql="insert into mylist (name,price) values (%s,%s,%s);"
+    cur.execute(sql,(name,price))
+    conn.commit()
+    return True
+
+def removeGood1(id):
     #移除商品項目
     sql="DELETE FROM `shoplist` WHERE id = %s;"
+    cur.execute(sql,(id,))
+    conn.commit()
+    return True
+    
+def removeGood2(id):
+    #移除商品項目
+    sql="DELETE FROM `mylist` WHERE id = %s;"
     cur.execute(sql,(id,))
     conn.commit()
     return True

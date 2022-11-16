@@ -21,7 +21,9 @@ print("""
 
 #查詢
 form = cgi.FieldStorage()
-id=form.getvalue('i')
-print(f"商品已經移除!")
-print("<br><a href='myCart.py'>確認</a>")
+id=form.getvalue('id')
+ctrl.removeGood1(id)
+ctrl.removeGood2(id)
+print("商品已經移除!")
+print("<br><a href='menu.py'>確認</a>")
 print("</body></html>")
