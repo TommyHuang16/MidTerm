@@ -2,51 +2,59 @@
 #連線DB
 from dbConfig import conn, cur
 def getShopList():
-    #查詢購物列表
-    sql="select id, name,price,stock from shoplist order by id asc;"
+    #查詢購物列表(顧客端)
+    sql="select id, name,price,stock from shoplist where stock != 0 order by id asc ;"
     cur.execute(sql)
     records = cur.fetchall()
     return records
+    
+def getShopListAdmin():
+    #查詢購物列表(管理端)
+    sql="select id, name,price,stock from shoplist order by id asc ;"
+    cur.execute(sql)
+    records = cur.fetchall()
+    return records    
 
 def getMyList():
-    #查詢我的購物車
+    #查詢客戶的購物車
     sql="select id, name,price,amount from mylist order by id asc;"
     cur.execute(sql)
     records = cur.fetchall()
     return records
     
-def removeFromCart(id):
+def removeFromCart(id,amount):
     #從購物車中拿出，已經是0的不會有反應
-    sql="UPDATE `mylist` SET `amount`= amount-1 WHERE id=%s and amount != 0;"
-    cur.execute(sql,(id,))
-    conn.commit()
-    return True
+    if amount!=0:
+        sql="UPDATE `mylist` SET `amount`= amount-%s WHERE id=%s;"
+        cur.execute(sql,(amount,id))
+        conn.commit()
+        return True
 
-def addIntoCart(id):
+def addIntoCart(id,amount):
     #加入購物車
-    sql="UPDATE `mylist` SET `amount`= amount+1 WHERE id=%s;"
-    cur.execute(sql,(id,))
+    sql="UPDATE `mylist` SET `amount`= amount+%s WHERE id=%s;"
+    cur.execute(sql,(amount,id))
     conn.commit()
     return True
 
-def updateStock1(id):
-    #加入購物車後，購物列表存貨更新
-    sql="UPDATE `shoplist` SET `stock`= stock-1 WHERE id=%s and stock != 0;"
-    cur.execute(sql,(id,))
+def updateStock1(id,amount):
+    #放入購物車後，購物列表存貨更新
+    sql="UPDATE `shoplist` SET `stock`= stock-%s WHERE id=%s;"
+    cur.execute(sql,(amount,id))
     conn.commit()
     return True
     
-def updateStock2(id):
-    #加入購物車後，我的購物車更新
-    sql="UPDATE `shoplist` SET `stock`= stock+1 WHERE id=%s;"
-    cur.execute(sql,(id,))
+def updateStock2(id,amount):
+    #拿出購物車後，購物列表存貨更新
+    sql="UPDATE `shoplist` SET `stock`= stock+%s WHERE id=%s;"
+    cur.execute(sql,(amount,id))
     conn.commit()
     return True
     
 def addStock(id,stock):
     #進貨
     sql="UPDATE `shoplist` SET `stock`= stock+%s WHERE id=%s;"
-    cur.execute(sql,(id,stock))
+    cur.execute(sql,(stock,id))
     conn.commit()
     return True
 
@@ -57,9 +65,9 @@ def addGoodInShopList(name,price,stock):
     conn.commit()
     return True
 
-def addGoodInCart(name,price,stock):
+def addGoodInCart(name,price):
     #增加商品項目(商品列表)
-    sql="insert into mylist (name,price) values (%s,%s,%s);"
+    sql="insert into mylist (name,price) values (%s,%s);"
     cur.execute(sql,(name,price))
     conn.commit()
     return True

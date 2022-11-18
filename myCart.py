@@ -17,15 +17,12 @@ print("""
 <title>我的購物車</title>
 </head>
 <body>
-<form method="post" action="removeFromCart.py">
-輸入要拿出的商品ID: <input type='text' name='i'><input type='submit'>
-</form> <br>
-</body>
 """)
 
 records = ctrl.getMyList()
 for (id,name,price,amount) in records:
 	print(f"<p>ID:{id} 名稱:{name} 價格:{price} 數量:{amount}</p>")
 print("<a href='menu.py'>回商品列表</a>")
+print("<br><a href='removeFromCart.html'>拿出購物車</a>")
 print("<br><a href='結帳.py'>結帳</a>")
 print("</body></html>")
