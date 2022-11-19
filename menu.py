@@ -17,6 +17,7 @@ print("""
 <title>商品列表</title>
 </head>
 <body>
+
 """)
 
 records = ctrl.getShopList()

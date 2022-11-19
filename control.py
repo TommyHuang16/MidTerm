@@ -31,8 +31,8 @@ def removeFromCart(id,amount):
 
 def addIntoCart(id,amount):
     #加入購物車
-    sql="UPDATE `mylist` SET `amount`= amount+%s WHERE id=%s;"
-    cur.execute(sql,(amount,id))
+    sql="UPDATE `mylist` SET `amount`= amount+%s WHERE id=%s and (select stock from shoplist where id=%s) > %s;"
+    cur.execute(sql,(amount,id,id,amount))
     conn.commit()
     return True
 
