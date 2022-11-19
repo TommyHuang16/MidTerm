@@ -1,17 +1,17 @@
 # MidTerm
 108213016 黃宇成，期中購物車作業，各個檔案的簡介由上至下：
 
-1. addCart.py為將商品加入購物車的後端程式
+1. addCart.py為客戶將商品加入購物車的後端程式
 
-2. addCartForm.html為加入購物車之前端程式
+2. addCartForm.html為客戶加入購物車之前端程式
 
-3. addGood.html為加入新增商品的前端程式
+3. addGood.html為管理者加入新增商品的前端程式
 
-4. addGood.py為將商品新增商品之後端程式
+4. addGood.py為將管理者商品新增商品之後端程式
 
-5. addStock.html為進貨的前端程式
+5. addStock.html為管理者進貨的前端程式
 
-6. addStock.py為將進貨的後端程式
+6. addStock.py為將管理者進貨的後端程式
 
 7. Admin.py為管理端首頁(顯示所有的商品)
 
