@@ -20,11 +20,13 @@ print("""
 """)
 
 #查詢
+
+
 form = cgi.FieldStorage()
 id=form.getvalue('id') 
 amount=form.getvalue('amount')
 ctrl.addIntoCart(id,amount)
-ctrl.updateStock1(id,amount)
+
 print("商品已存入!")
 print("<br><a href='myCart.py'>回購物車</a>")
 print("</body></html>")

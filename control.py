@@ -24,11 +24,10 @@ def getMyList():
     
 def removeFromCart(id,amount):
     #從購物車中拿出，已經是0的不會有反應
-    if amount!=0:
-        sql="UPDATE `mylist` SET `amount`= amount-%s WHERE id=%s;"
-        cur.execute(sql,(amount,id))
-        conn.commit()
-        return True
+    sql="UPDATE `mylist` SET `amount`= amount-%s WHERE id=%s and amount!=0;"
+    cur.execute(sql,(amount,id))
+    conn.commit()
+    return True
 
 def addIntoCart(id,amount):
     #加入購物車
@@ -38,7 +37,7 @@ def addIntoCart(id,amount):
     return True
 
 def updateStock1(id,amount):
-    #放入購物車後，購物列表存貨更新
+    #結帳後，購物列表存貨更新
     sql="UPDATE `shoplist` SET `stock`= stock-%s WHERE id=%s;"
     cur.execute(sql,(amount,id))
     conn.commit()
@@ -83,5 +82,11 @@ def removeGood2(id):
     #移除商品項目
     sql="DELETE FROM `mylist` WHERE id = %s;"
     cur.execute(sql,(id,))
+    conn.commit()
+    return True
+   
+def cleanCart():
+    sql="UPDATE `mylist` SET `amount`= 0;"
+    cur.execute(sql)
     conn.commit()
     return True
