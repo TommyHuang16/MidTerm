@@ -17,6 +17,7 @@ print("""
 <title>我的購物車</title>
 </head>
 <body>
+<p>滿1000打8折，其餘打9折</p>
 """)
 
 records = ctrl.getMyList()

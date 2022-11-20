@@ -24,7 +24,7 @@ form = cgi.FieldStorage()
 id=form.getvalue('id')
 amount=form.getvalue('amount')
 ctrl.removeFromCart(id,amount)
-ctrl.updateStock2(id,amount)
+
 print(f"商品已經拿出!")
 print("<br><a href='myCart.py'>回購物車</a>")
 print("</body></html>")

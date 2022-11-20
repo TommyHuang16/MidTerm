@@ -43,12 +43,6 @@ def updateStock1(id,amount):
     conn.commit()
     return True
     
-def updateStock2(id,amount):
-    #拿出購物車後，購物列表存貨更新
-    sql="UPDATE `shoplist` SET `stock`= stock+%s WHERE id=%s;"
-    cur.execute(sql,(amount,id))
-    conn.commit()
-    return True
     
 def addStock(id,stock):
     #進貨
@@ -65,7 +59,7 @@ def addGoodInShopList(name,price,stock):
     return True
 
 def addGoodInCart(name,price):
-    #增加商品項目(商品列表)
+    #增加商品項目(購物車)
     sql="insert into mylist (name,price) values (%s,%s);"
     cur.execute(sql,(name,price))
     conn.commit()
@@ -86,7 +80,22 @@ def removeGood2(id):
     return True
    
 def cleanCart():
+    #結帳後購物車清零
     sql="UPDATE `mylist` SET `amount`= 0;"
     cur.execute(sql)
+    conn.commit()
+    return True
+    
+def edit1(id,name,price):
+    #編輯商品(商品列表)
+    sql="UPDATE `shoplist` SET `name`= %s,`price`=%s where id = %s;"
+    cur.execute(sql,(name,price,id))
+    conn.commit()
+    return True
+
+def edit2(id,name,price):
+    #編輯商品(購物車)
+    sql="UPDATE `mylist` SET `name`= %s,`price`=%s where id = %s;"
+    cur.execute(sql,(name,price,id))
     conn.commit()
     return True

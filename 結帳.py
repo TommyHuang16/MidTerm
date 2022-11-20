@@ -19,14 +19,20 @@ print("""
 <body>
 """)
 total = 0
+discount = 0
 records = ctrl.getMyList()
 
 for(id,name,price,amount) in records:
     total += price*amount
-    ctrl.updateStock1(id,amount)
+if total >= 1000:
+    discount = total*0.8
+else: 
+    discount = total * 0.9
+ctrl.updateStock1(id,amount)
 
 ctrl.cleanCart()
     
 print(f"<p>總價：{total}</p>")
+print(f"<p>打折後：{discount}</p>")
 print("<a href='myCart.py'>回購物車</a>")
 print("</body></html>")

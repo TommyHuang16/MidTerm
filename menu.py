@@ -22,7 +22,7 @@ print("""
 
 records = ctrl.getShopList()
 for (id,name,price,stock) in records:
-	print(f"<p>ID:{id} 名稱:{name} 價格:{price} </p> ")
+	print(f"<p>ID:{id} 名稱:{name} 價格:{price} 庫存：{stock}</p>")
 
 print("<a href='addCartForm.html'> 開始購買 </a>")
 print("<p><a href='myCart.py'> 查看購物車 </a></p>")
